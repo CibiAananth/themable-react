@@ -1,32 +1,30 @@
 import React from 'react';
+import { ColorMode, useColorMode } from 'theme-ui';
+import { Box } from 'rebass';
 
-import ErrorBoundary from 'utils/ErrorBoundary/ErrorBoundary';
-import logo from './logo.svg';
-import './App.css';
+import ErrorBoundary from 'utils/ErrorBoundary';
+import { withTheme } from 'theme';
+
+import ButtonWrapper from 'ui-components/Button/Button';
 
 function App() {
+  const [colorMode, setColorMode] = useColorMode();
   return (
     <ErrorBoundary>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit
-            <code>src/App.js</code>
-            and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ColorMode />
+      <Box p={5} fontSize={4} width={[1, 1, 1 / 2]} bg="primary" color="text">
+        Box
+      </Box>
+      <ButtonWrapper
+        bg="primary"
+        color="text"
+        onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}
+      >
+        Toggle
+        {colorMode === 'light' ? 'Dark' : 'Light'}
+      </ButtonWrapper>
     </ErrorBoundary>
   );
 }
 
-export default App;
+export default withTheme(App, { initialColorMode: 'dark' });

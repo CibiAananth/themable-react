@@ -4,6 +4,8 @@ import './index.css';
 import reportError from 'utils/crashReporter';
 import App from './App';
 
+localStorage.clear();
+
 const monitorError = () => {
   window.onerror = (message, file, line, column, errorObject) => {
     const stack = errorObject ? errorObject.stack : null;
