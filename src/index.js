@@ -1,18 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import reportError from 'utils/crashReporter';
-import App from './App';
+// redux-utils
+import { Provider } from 'react-redux';
+import store from 'redux-utils/store';
+// styles
+import 'index.scss';
+// main
+import App from 'App';
 
-localStorage.clear();
-
-const monitorError = () => {
-  window.onerror = (message, file, line, column, errorObject) => {
-    const stack = errorObject ? errorObject.stack : null;
-    reportError(stack);
-    return false;
-  };
-};
-
-monitorError();
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);

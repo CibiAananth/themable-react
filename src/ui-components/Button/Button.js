@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'rebass';
+import { Button } from '@theme-ui/components';
 
 const getHeightWidth = size => {
   switch (size) {
@@ -11,7 +11,7 @@ const getHeightWidth = size => {
   }
 };
 
-const ButtonWrapper = ({ w, h, size, children, ...rest }) => {
+const ButtonWrapper = ({ w, h, size, children, bg, ...rest }) => {
   let { width, height } = getHeightWidth(size);
   width = w || width;
   height = h || height;
@@ -23,8 +23,7 @@ const ButtonWrapper = ({ w, h, size, children, ...rest }) => {
         outline: 'none',
         cursor: 'pointer'
       }}
-      bg="primary"
-      color="text"
+      color="buttonText"
       {...rest}
     >
       {children}
@@ -33,6 +32,7 @@ const ButtonWrapper = ({ w, h, size, children, ...rest }) => {
 };
 
 ButtonWrapper.propTypes = {
+  bg: PropTypes.string,
   w: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   h: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.oneOfType([
@@ -46,7 +46,8 @@ ButtonWrapper.propTypes = {
 ButtonWrapper.defaultProps = {
   w: null,
   h: null,
-  size: 'sm'
+  size: 'sm',
+  bg: 'primary'
 };
 
 export default ButtonWrapper;

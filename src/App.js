@@ -1,28 +1,33 @@
 import React from 'react';
-import { ColorMode, useColorMode } from 'theme-ui';
-import { Box } from 'rebass';
-
+// theme
+import { withTheme } from 'theme/index';
+// routers
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Route
+} from 'react-router-dom';
+import PrivateRoute from 'routes/index';
+// error monitoring
 import ErrorBoundary from 'utils/ErrorBoundary';
-import { withTheme } from 'theme';
 
-import Button from 'ui-components/Button/Button';
+// views
+import LoginContainer from 'pages/Login/LoginContainer';
+import MainContainer from 'pages/Main/MainContainer';
 
 function App() {
-  const [colorMode, setColorMode] = useColorMode();
   return (
     <ErrorBoundary>
-      <ColorMode />
-      <Box p={5} fontSize={4} width={[1, 1, 1 / 2]} bg="primary" color="text">
-        Box
-      </Box>
-      <Button
-        onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}
-      >
-        Toggle
-        {colorMode === 'light' ? 'Dark' : 'Light'}
-      </Button>
+      <Router>
+        <Switch>
+          <PrivateRoute path="/app" component={MainContainer} />
+          <Route path="/login" exact component={LoginContainer} />
+          <Redirect from="/" to="/app" />
+        </Switch>
+      </Router>
     </ErrorBoundary>
   );
 }
 
-export default withTheme(App, { initialColorMode: 'dark' });
+export default withTheme(App);

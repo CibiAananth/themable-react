@@ -2,7 +2,7 @@
 import React from 'react';
 import { ThemeProvider } from 'theme-ui';
 
-import { theme } from 'theme';
+import theme from './theme';
 
 export default WrappedComponent => {
   const WithTheme = props => {

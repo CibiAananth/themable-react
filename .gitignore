@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# docs
+/docs
+/esdoc
+
 # testing
 /coverage
 
@@ -13,8 +17,9 @@
 
 # misc
 .DS_Store
-.env
 .env.*
+.env
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
