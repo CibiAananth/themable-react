@@ -14,14 +14,14 @@ import ErrorBoundary from 'utils/ErrorBoundary';
 
 // views
 import LoginContainer from 'pages/Login/LoginContainer';
-import MainContainer from 'pages/Main/MainContainer';
+import MainLayout from 'layout/Main/MainLayout';
 
 function App() {
   return (
     <ErrorBoundary>
       <Router>
         <Switch>
-          <PrivateRoute path="/app" component={MainContainer} />
+          <PrivateRoute path="/app" component={MainLayout} />
           <Route path="/login" exact component={LoginContainer} />
           <Redirect from="/" to="/app" />
         </Switch>

@@ -39,7 +39,7 @@ const LoginPage = ({ handleLogin, requestStatus }) => {
           <img css={css({ maxWidth: 30 })} src={logo} alt="company=logo" />
         </Box>
         <Box name="logo-text" p={2}>
-          <Text sx={{ fontWeight: 600 }} color="logo-blue" variant="caps">
+          <Text sx={{ fontWeight: 600 }} color="secondary" variant="caps">
             Storage web
           </Text>
         </Box>
@@ -81,12 +81,17 @@ const LoginPage = ({ handleLogin, requestStatus }) => {
           />
           <Divider />
           {requestStatus.login.isFetching ? (
-            <Spinner size={40} strokeWidth={2} />
+            <Spinner color="secondary" size={40} strokeWidth={2} />
           ) : (
             <Button
-              onClick={() => handleLogin(inputValue)}
               w={120}
-              variant="primary"
+              sx={{
+                bg: 'secondary',
+                color: 'buttonText',
+                fontWeight: 700,
+                textTransform: 'uppercase'
+              }}
+              onClick={() => handleLogin(inputValue)}
             >
               Login
             </Button>

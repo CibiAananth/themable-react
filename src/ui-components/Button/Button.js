@@ -11,7 +11,7 @@ const getHeightWidth = size => {
   }
 };
 
-const ButtonWrapper = ({ w, h, size, children, bg, ...rest }) => {
+const ButtonWrapper = ({ w, h, size, children, bg, sx, ...rest }) => {
   let { width, height } = getHeightWidth(size);
   width = w || width;
   height = h || height;
@@ -21,9 +21,10 @@ const ButtonWrapper = ({ w, h, size, children, bg, ...rest }) => {
         height,
         width,
         outline: 'none',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        color: 'buttonText',
+        ...sx
       }}
-      color="buttonText"
       {...rest}
     >
       {children}
@@ -33,6 +34,7 @@ const ButtonWrapper = ({ w, h, size, children, bg, ...rest }) => {
 
 ButtonWrapper.propTypes = {
   bg: PropTypes.string,
+  sx: PropTypes.object,
   w: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   h: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.oneOfType([
@@ -44,10 +46,11 @@ ButtonWrapper.propTypes = {
 };
 
 ButtonWrapper.defaultProps = {
-  w: null,
+  bg: 'primary',
+  sx: {},
+  w: 100,
   h: null,
-  size: 'sm',
-  bg: 'primary'
+  size: 'sm'
 };
 
 export default ButtonWrapper;
