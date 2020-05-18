@@ -1,8 +1,9 @@
 const model = {
   auth: 'rx_auth',
-  tag: 'rx_tag',
-  video: 'rx_video',
-  upload: 'rx_upload'
+  problems: 'rx_problems',
+  datasets: 'rx_datasets',
+  models: 'rx_models',
+  tags: 'rx_tags'
 };
 
 export default model;

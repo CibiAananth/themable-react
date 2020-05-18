@@ -2,10 +2,12 @@
 import { combineReducers } from 'redux';
 import { includes } from 'lodash';
 // reducers
-import userReducer from 'redux-utils/reducers/user';
 import authReducer from 'redux-utils/reducers/auth';
+import datasetsReducer from 'redux-utils/reducers/datasets';
+import problemsReducer from 'redux-utils/reducers/problems';
+import tagsReducer from 'redux-utils/reducers/tags';
 // model
-import reducerModel from 'models/reducerModel';
+import { reducerModel } from 'models/index';
 
 const limited = (reducer, predicate) => (state, action) =>
   predicate(action) ? reducer(state, action) : state;
@@ -16,10 +18,20 @@ const mainReducer = combineReducers({
       ? true
       : includes(action.meta.reducerID, reducerModel.auth)
   ),
-  userState: limited(userReducer, action =>
+  datasetsStore: limited(datasetsReducer, action =>
     action.meta === undefined
       ? true
-      : includes(action.meta.reducerID, 'rx_user')
+      : includes(action.meta.reducerID, reducerModel.datasets)
+  ),
+  problemsStore: limited(problemsReducer, action =>
+    action.meta === undefined
+      ? true
+      : includes(action.meta.reducerID, reducerModel.problems)
+  ),
+  tagsStore: limited(tagsReducer, action =>
+    action.meta === undefined
+      ? true
+      : includes(action.meta.reducerID, reducerModel.tags)
   )
 });
 

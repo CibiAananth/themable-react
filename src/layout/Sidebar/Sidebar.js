@@ -17,7 +17,7 @@ const Sidebar = ({ routes, history }) => {
       {routes.map(route => {
         const activeRoute = checkActiveRoute(location.pathname, route.path);
         return (
-          !route.redirect && (
+          route.showInSideBar && (
             <Flex
               as="nav"
               key={route.path}

@@ -1,33 +1,23 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 // redux-utils
-import { authTypes } from 'redux-utils/types/index';
+import { tagsTypes } from 'redux-utils/types/index';
 import { actionTypeFormatter } from 'redux-utils/sagas/index';
 // api helpers
 import { api, endpoints } from 'api/index';
-import ls from 'lib/core/storageFactory';
 
 /**
  * @name appWatcherSaga
  * @description Watches for the action dispatched of certain type.
  */
-const watcherSaga = [
-  takeEvery(authTypes.userLogin.request, getWorkerSaga),
-  takeEvery(authTypes.userLogout.request, getWorkerSaga)
-];
+const watcherSaga = [takeEvery(tagsTypes.getTag.request, getWorkerSaga)];
 
 function getWorkerSaga(action) {
   switch (action.type) {
-    case authTypes.userLogin.request: {
+    case tagsTypes.getTag.request: {
       return apiWorkerSaga(action, {
-        endpoint: endpoints.userLogin,
-        method: api.post
-      });
-    }
-    case authTypes.userLogout.request: {
-      return apiWorkerSaga(action, {
-        endpoint: endpoints.userLogout,
-        headers: ['auth'],
-        method: api.post
+        endpoint: endpoints.getTag,
+        method: api.get,
+        headers: ['auth']
       });
     }
     default:
@@ -49,13 +39,6 @@ function* apiWorkerSaga(action, params) {
       ...params
     });
     if (response) {
-      if (action.type === authTypes.userLogin.request) {
-        ls.set('userToken', response.token);
-        ls.set('isLoggedIn', true);
-      }
-      if (action.type === authTypes.userLogout.request) {
-        ls.clear();
-      }
       yield put({
         meta: action.meta,
         type: actionTypeFormatter(action.type, 'SUCCESS'),

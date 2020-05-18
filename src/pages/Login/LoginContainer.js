@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 // redux utils
 import { authSelectors } from 'redux-utils/selectors/index';
 import { authActions } from 'redux-utils/actions/index';
-// core functions
+// local storage wrapper
 import ls from 'lib/core/storageFactory';
 // core components
 import Alert from 'ui-components/Alert/Alert';
@@ -24,7 +24,7 @@ const LoginContainer = ({
     const redirectLogin = () => {
       history.replace('/app');
     };
-    if (ls.get('isLoggedIn') || authState.isLoggedIn) {
+    if (ls.get('isLoggedIn') && authState.isLoggedIn) {
       redirectLogin();
     }
   }, [history, authState.isLoggedIn]);

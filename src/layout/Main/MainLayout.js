@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { jsx, Box } from 'theme-ui';
 import { map } from 'lodash';
@@ -6,14 +7,24 @@ import { map } from 'lodash';
 import { connect } from 'react-redux';
 import { authSelectors } from 'redux-utils/selectors/index';
 import { authActions } from 'redux-utils/actions/index';
+// local storage wrapper
+import ls from 'lib/core/storageFactory';
 // routes
 import { SwitchRoutes, appRoutes } from 'routes/index';
 // views
 import Header from 'layout/Header/Header';
 import Sidebar from 'layout/Sidebar/Sidebar';
 
-const MainLayout = ({ authState, dispatchLogoutRequest, ...rest }) => {
-  console.log('authState', authState);
+const MainLayout = ({ authState, history, dispatchLogoutRequest }) => {
+  useEffect(() => {
+    const redirectLogin = () => {
+      history.replace('/login');
+    };
+    if (!ls.get('isLoggedIn') && !authState.isLoggedIn) {
+      redirectLogin();
+    }
+  }, [history, authState.isLoggedIn]);
+
   return (
     <div>
       <Header handleLogout={dispatchLogoutRequest} />
@@ -30,9 +41,9 @@ const MainLayout = ({ authState, dispatchLogoutRequest, ...rest }) => {
         }}
       >
         <nav>
-          <Sidebar {...rest} routes={map(appRoutes, el => el)} />
+          <Sidebar history={history} routes={map(appRoutes, el => el)} />
         </nav>
-        <main>
+        <main sx={{ height: '100%', overflow: 'auto' }}>
           <SwitchRoutes routes={map(appRoutes, el => el)} />
         </main>
       </Box>
@@ -42,6 +53,7 @@ const MainLayout = ({ authState, dispatchLogoutRequest, ...rest }) => {
 
 MainLayout.propTypes = {
   authState: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   dispatchLogoutRequest: PropTypes.func.isRequired
 };
 

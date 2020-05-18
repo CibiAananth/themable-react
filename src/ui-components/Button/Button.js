@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@theme-ui/components';
+import { Button as ButtonComponent } from '@theme-ui/components';
 
 const getHeightWidth = size => {
   switch (size) {
@@ -11,30 +11,39 @@ const getHeightWidth = size => {
   }
 };
 
-const ButtonWrapper = ({ w, h, size, children, bg, sx, ...rest }) => {
+const Button = ({ w, h, size, children, sax, variant, ...rest }) => {
+  const { color } = sax;
   let { width, height } = getHeightWidth(size);
   width = w || width;
   height = h || height;
   return (
-    <Button
+    <ButtonComponent
+      variant={variant}
       sx={{
         height,
         width,
         outline: 'none',
         cursor: 'pointer',
         color: 'buttonText',
-        ...sx
+        ...(variant === 'outlined' && {
+          '&:hover': {
+            backgroundColor: color,
+            color: '#fff',
+            borderColor: color
+          }
+        }),
+        ...sax
       }}
       {...rest}
     >
       {children}
-    </Button>
+    </ButtonComponent>
   );
 };
 
-ButtonWrapper.propTypes = {
-  bg: PropTypes.string,
-  sx: PropTypes.object,
+Button.propTypes = {
+  sax: PropTypes.object,
+  variant: PropTypes.string,
   w: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   h: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.oneOfType([
@@ -45,12 +54,12 @@ ButtonWrapper.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
 };
 
-ButtonWrapper.defaultProps = {
-  bg: 'primary',
-  sx: {},
-  w: 100,
+Button.defaultProps = {
+  sax: {},
+  w: 'max-content',
   h: null,
-  size: 'sm'
+  size: 'sm',
+  variant: ''
 };
 
-export default ButtonWrapper;
+export default Button;

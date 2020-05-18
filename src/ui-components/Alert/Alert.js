@@ -7,10 +7,10 @@ import { Alert as AlertComponent, Close } from 'theme-ui';
  * @hideconstructor
  * @description Core Alert component
  */
-const Alert = ({ sx, children, useClose, onClose, ...rest }) => {
+const Alert = ({ sax, children, useClose, onClose, ...rest }) => {
   return (
     <>
-      <AlertComponent sx={sx} {...rest}>
+      <AlertComponent sx={sax} {...rest}>
         {children}
         {useClose && <Close onClick={onClose} ml="auto" mr={-2} />}
       </AlertComponent>
@@ -19,14 +19,14 @@ const Alert = ({ sx, children, useClose, onClose, ...rest }) => {
 };
 
 Alert.propTypes = {
-  sx: PropTypes.object,
+  sax: PropTypes.object,
   onClose: PropTypes.func,
   children: PropTypes.any.isRequired,
   useClose: PropTypes.bool
 };
 
 Alert.defaultProps = {
-  sx: {},
+  sax: {},
   onClose: () => {},
   useClose: true
 };

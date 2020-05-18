@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Container, Box, Flex, css, jsx, Spinner } from 'theme-ui';
 import Button from 'ui-components/Button/Button';
 import Divider from 'ui-components/Divider/Divider';
-import Input from 'ui-components/Input/Input';
+import Field from 'ui-components/Input/Field';
 import Text from 'ui-components/Text/Text';
 import ThemeToggle from 'ui-components/ThemeToggle/ThemeToggle';
 // assets
@@ -65,15 +65,20 @@ const LoginPage = ({ handleLogin, requestStatus }) => {
             Welcome Back, Please login to continue
           </Text>
           <Divider />
-          <Input
+          <Field
             placeholder="Username"
+            name="username"
+            type="text"
+            defaultValue=""
             onChange={e =>
               handleInputChange({ field: 'username', value: e.target.value })
             }
           />
           <Divider />
-          <Input
+          <Field
             placeholder="Password"
+            name="password"
+            type="password"
             onChange={e =>
               handleInputChange({ field: 'password', value: e.target.value })
             }

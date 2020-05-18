@@ -1,4 +1,6 @@
-import * as userSelectors from 'redux-utils/selectors/user';
 import * as authSelectors from 'redux-utils/selectors/auth';
+import * as problemsSelectors from 'redux-utils/selectors/problems';
+import * as datasetsSelectors from 'redux-utils/selectors/datasets';
+import * as tagsSelectors from 'redux-utils/selectors/tags';
 
-export { authSelectors, userSelectors };
+export { authSelectors, datasetsSelectors, problemsSelectors, tagsSelectors };

@@ -2,11 +2,12 @@ const theme = {
   initialColorModeName: 'dark',
   colors: {
     // 'logo-blue': '#2e79bc',
-    primary: '#ee00ff',
-    secondary: '#33ccff',
     muted: '#959aa5',
+    danger: '#f36',
     modes: {
       dark: {
+        primary: '#33ccff',
+        secondary: '#ee00ff',
         buttonText: '#000',
         text: '#fff',
         background: '#191919',
@@ -14,11 +15,16 @@ const theme = {
         toggleBorder: '#fff',
         toggle: '#091236',
         light8: 'rgba(255, 255, 255, 0.8)',
+        light4: 'rgba(255, 255, 255, 0.4)',
+        subtle: '#252525',
         inputBorder: 'rgb(43, 53, 83)',
         highlight: '#29112c',
         navText: '#33ccff'
       },
       light: {
+        primary: '#30c',
+        secondary: '#6100cc',
+        // muted: '#f6f6f6',
         buttonText: '#fff',
         text: '#000',
         background: '#fff',
@@ -26,7 +32,9 @@ const theme = {
         toggleBorder: '#efd645',
         toggle: '#fafad2',
         light8: 'rgba(0, 0, 0, 0.8)',
-        inputBorder: 'rgb(171, 183, 216)',
+        light4: 'rgba(0, 0, 0, 0.4)',
+        subtle: '#fbfbfb',
+        inputBorder: 'rgb(235, 236, 236)',
         highlight: '#efeffe',
         navText: '#3333ee'
       }
@@ -66,7 +74,6 @@ const theme = {
       border: '3px solid',
       fontWeight: 700,
       borderRadius: 0,
-      background: 'none',
       backgroundColor: 'transparent'
     }
   },

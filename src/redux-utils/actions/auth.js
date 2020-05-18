@@ -1,5 +1,5 @@
 import { authTypes } from 'redux-utils/types/index';
-import reducerModel from 'models/reducerModel';
+import { reducerModel } from 'models/index';
 
 import actionCreator from './actionCreator';
 

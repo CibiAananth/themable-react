@@ -25,6 +25,7 @@ const reducer = createReducer(initialState, {
   },
   [authTypes.userLogin.success]: (state, action) => {
     state.isLoggedIn = true;
+    state.isLoggedOut = false;
     state.apiRequestStatus.login = { isFetching: false, error: false };
     const profile = { ...action.payload.response };
     delete profile.status;
@@ -41,13 +42,11 @@ const reducer = createReducer(initialState, {
     state.profile = {};
     state.apiRequestStatus.logout = { isFetching: true, error: false };
   },
-  [authTypes.userLogout.success]: (state, action) => {
+  [authTypes.userLogout.success]: state => {
     state.isLoggedOut = true;
+    state.isLoggedIn = false;
     state.apiRequestStatus.logout = { isFetching: false, error: false };
-    const profile = { ...action.payload.response };
-    delete profile.status;
-    delete profile.token;
-    state.profile = profile;
+    state.profile = {};
   },
   [authTypes.userLogout.failure]: state => {
     state.isLoggedOut = false;

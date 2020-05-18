@@ -16,12 +16,12 @@ const Header = ({ handleLogout }) => {
           <img css={css({ maxWidth: 30 })} src={logo} alt="company=logo" />
         </Box>
         <Box name="logo-text" p={2}>
-          <Text sx={{ fontWeight: 600 }} color="secondary" variant="caps">
+          <Text sx={{ fontWeight: 600 }} color="primary" variant="caps">
             Storage web
           </Text>
         </Box>
         <Button
-          sx={{ color: 'secondary' }}
+          sax={{ color: 'primary' }}
           variant="outlined"
           p={2}
           ml="auto"

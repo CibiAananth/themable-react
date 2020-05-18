@@ -8,11 +8,9 @@ const secureLs = new SecureLS({
 
 function storageFactory() {
   let inMemoryStorage = {};
-
   function isSupported() {
     try {
       const testKey = '__some_random_key_you_are_not_going_to_use__';
-      secureLs.set(testKey, testKey);
       secureLs.remove(testKey);
       return true;
     } catch (e) {
@@ -22,7 +20,7 @@ function storageFactory() {
 
   function clear() {
     if (isSupported()) {
-      secureLs.clear();
+      getAllKeys().map(k => remove(k));
     } else {
       inMemoryStorage = {};
     }
@@ -68,6 +66,13 @@ function storageFactory() {
     return Object.keys(inMemoryStorage).length;
   }
 
+  function getAllKeys() {
+    if (isSupported()) {
+      return secureLs.getAllKeys();
+    }
+    return Object.keys(inMemoryStorage);
+  }
+
   return {
     get,
     set,
@@ -75,6 +80,9 @@ function storageFactory() {
     isSupported,
     clear,
     key,
+    get getAllKeys() {
+      return getAllKeys();
+    },
     get length() {
       return length();
     }
