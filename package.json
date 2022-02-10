@@ -15,7 +15,7 @@
     "bugsnag-build-reporter": "^1.0.2",
     "bugsnag-sourcemaps": "^1.2.1",
     "draft-js": "^0.11.5",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
